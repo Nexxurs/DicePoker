@@ -1,0 +1,20 @@
+<div class="border rounded-md p-5">
+    <div class="text-xl text-center pb-2">{{playerName}}</div>
+
+    <table>
+        <tbody>
+            @for (rollType of rollTypes; track $index) {
+            <tr>
+                <td>
+                    {{rollType}}
+                </td>
+                @for (col of rangeTo(numColumns); track $index) {
+                <td class="text-center px-1">
+                    <app-point-field [name]="playerName" [col]="col" [rolltype]="rollType" />
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
