@@ -1,8 +1,11 @@
 <ng-template #popoverTemplate>
-    @for (value of rolltype.possibleValues; track $index) {
-    <button class="h-8 w-8 border rounded-md mx-1" (click)="onSetPoints(value)">{{value}}</button>
-    }
+    <div class="flex flex-grow flex-wrap gap-1">
+        @for (value of getPossiblePoints(); track $index) {
+        <button class="border h-10 w-10 rounded-md shrink-0"
+            (click)="onSetPoints(value.points)">{{value.label}}</button>
+        }
+    </div>
 </ng-template>
 
-<button class="border h-8 w-8 rounded-md" [popover]="popoverTemplate" [outsideClick]="true"
-    #popover="bs-popover">{{getPoints()}}</button>
+<button class="border h-10 w-10 rounded-md" [popover]="popoverTemplate" [outsideClick]="true" #popover="bs-popover"
+    placement="top">{{getPoints()}}</button>

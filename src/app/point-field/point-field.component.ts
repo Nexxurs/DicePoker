@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { GameService } from '../game.service';
 import { PopoverModule, PopoverDirective } from 'ngx-bootstrap/popover'
 import { RollType } from '../../types/types';
@@ -19,6 +19,7 @@ export class PointFieldComponent {
 
   private gameService = inject(GameService)
   getPoints() {
+
     let points = this.gameService.getPoints(this.name, this.col, this.rolltype.label)
     if (points == 0) {
       return " "
@@ -27,6 +28,14 @@ export class PointFieldComponent {
       return "X"
     }
     return points
+  }
+
+  getPossiblePoints() {
+    let result: { label: string, points: number }[] = []
+    result.push({ label: "", points: 0 })
+    result = result.concat(this.rolltype.possibleValues.map(val => { return { label: val.toString(), points: val } }))
+    result.push({ label: "X", points: -1 })
+    return result
   }
 
   onSetPoints(points: number) {
