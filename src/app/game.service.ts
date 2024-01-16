@@ -46,7 +46,7 @@ class Game {
     if (this.gamestates.has(name)) {
       throw Error("User " + name + " cannot be added twice")
     }
-    let arr = Array(this.numCols).fill(new Map())
+    let arr = Array(this.numCols).fill(0).map(() => new Map())
     this.gamestates.set(name, arr)
   }
 
