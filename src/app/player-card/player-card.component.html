@@ -6,7 +6,7 @@
             @for (rollType of rollTypes; track $index) {
             <tr>
                 <td>
-                    {{rollType}}
+                    {{rollType.label}}
                 </td>
                 @for (col of rangeTo(numColumns); track $index) {
                 <td class="text-center px-1">

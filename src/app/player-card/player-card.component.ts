@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RollNames } from '../../types/types';
+import { RollTypes } from '../../types/types';
 import { rangeTo } from '../../utils/range';
 import { PointFieldComponent } from '../point-field/point-field.component';
 
@@ -13,7 +13,7 @@ import { PointFieldComponent } from '../point-field/point-field.component';
 export class PlayerCardComponent {
   @Input() numColumns!: number
   @Input() playerName!: string
-  rollTypes = RollNames
+  rollTypes = RollTypes
 
   rangeTo = rangeTo
 }

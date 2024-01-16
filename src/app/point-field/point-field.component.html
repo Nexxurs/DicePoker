@@ -1,1 +1,8 @@
-<button class="border h-8 w-8 rounded-md" (click)="onclick()">{{getPoints()}}</button>
+<ng-template #popoverTemplate>
+    @for (value of rolltype.possibleValues; track $index) {
+    <button class="h-8 w-8 border rounded-md mx-1" (click)="onSetPoints(value)">{{value}}</button>
+    }
+</ng-template>
+
+<button class="border h-8 w-8 rounded-md" [popover]="popoverTemplate" [outsideClick]="true"
+    #popover="bs-popover">{{getPoints()}}</button>
