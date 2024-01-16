@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { PlayerCardComponent } from './player-card/player-card.component';
 import { GameService } from './game.service';
+import { SetupComponent } from './setup/setup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PlayerCardComponent],
+  imports: [CommonModule, RouterOutlet, PlayerCardComponent, SetupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,7 +20,5 @@ export class AppComponent {
 
   gameService = inject(GameService)
   constructor() {
-    this.gameService.newGame(3)
-    this.gameService.addPlayer(this.mainPlayer)
   }
 }

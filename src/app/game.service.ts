@@ -11,6 +11,14 @@ export class GameService {
     this.currGame = new Game(numCols)
   }
 
+  resetGame() {
+    this.currGame = undefined
+  }
+
+  gameStarted() {
+    return Boolean(this.currGame)
+  }
+
   addPlayer(name: string) {
     if (!this.currGame) {
       throw Error("Game not initialized")
