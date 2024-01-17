@@ -18,20 +18,13 @@ export class SetupComponent {
 
   addPlayer(name: string) {
     this.players.push(name)
-    this.playerinput.nativeElement.value = ""
+    this.playerinput.nativeElement.value = ""    
   }
 
   startGame() {
-    console.log("Starting Game", this.players);
-
     let numCols = this.numColsInput.nativeElement.value as number
-    console.log("cols", numCols);
 
     this.gameService.newGame(numCols)
-    for (let player in this.players) {
-      this.gameService.addPlayer(player)
-    }
-    console.log(this.gameService.gameStarted());
-
+    this.players.forEach((player) => this.gameService.addPlayer(player))
   }
 }

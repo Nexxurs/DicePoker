@@ -1,6 +1,12 @@
 <main class="flex min-h-screen flex-col items-center justify-between p-24">
   @if (gameService.gameStarted()) {
-  <app-player-card [numColumns]="numCols" [playerName]="mainPlayer" />
+    <div class="flex flex-row space-x-2">
+    @for (player of gameService.getPlayers(); track $index) {
+      <app-player-card [numColumns]="gameService.getNumberColumns()" [playerName]="player" />
+    } 
+
+  </div>
+  
   } @else {
   <app-setup />
   }

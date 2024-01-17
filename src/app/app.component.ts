@@ -14,10 +14,6 @@ import { SetupComponent } from './setup/setup.component';
 })
 export class AppComponent {
   title = 'dice-poker-angular';
-  numCols = 3
-
-  mainPlayer = "Testing (me)"
-
   gameService = inject(GameService)
   constructor() {
   }

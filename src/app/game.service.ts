@@ -19,6 +19,22 @@ export class GameService {
     return Boolean(this.currGame)
   }
 
+  getNumberColumns() {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    return this.currGame.numCols
+  }
+
+  getPlayers() {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    console.log("Setting Players", this.currGame.getPlayers());
+    
+    return this.currGame.getPlayers()
+  }
+
   addPlayer(name: string) {
     if (!this.currGame) {
       throw Error("Game not initialized")
@@ -55,7 +71,7 @@ class Game {
       throw Error("User " + name + " cannot be added twice")
     }
     let arr = Array(this.numCols).fill(0).map(() => new Map())
-    this.gamestates.set(name, arr)
+    this.gamestates.set(name, arr)    
   }
 
   setPoints(name: string, col: number, rolltype: string, value: number) {
@@ -77,5 +93,9 @@ class Game {
       return 0
     }
     return columnMap.get(rolltype) as number
+  }
+
+  getPlayers(): string[] {    
+    return Array.from(this.gamestates.keys())
   }
 }
