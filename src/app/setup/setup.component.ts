@@ -22,7 +22,7 @@ export class SetupComponent {
   }
 
   startGame() {
-    let numCols = this.numColsInput.nativeElement.value as number
+    let numCols = Number(this.numColsInput.nativeElement.value)
 
     this.gameService.newGame(numCols)
     this.players.forEach((player) => this.gameService.addPlayer(player))

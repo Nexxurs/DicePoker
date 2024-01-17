@@ -7,7 +7,7 @@ export class GameService {
   private currGame?: Game
   constructor() { }
 
-  newGame(numCols: number) {
+  newGame(numCols: number) {    
     this.currGame = new Game(numCols)
   }
 
@@ -29,9 +29,7 @@ export class GameService {
   getPlayers() {
     if (!this.currGame) {
       throw Error("Game not initialized")
-    }
-    console.log("Setting Players", this.currGame.getPlayers());
-    
+    }    
     return this.currGame.getPlayers()
   }
 
@@ -66,11 +64,11 @@ class Game {
     this.numCols = numCols
   }
 
-  addPlayer(name: string) {
+  addPlayer(name: string) {    
     if (this.gamestates.has(name)) {
       throw Error("User " + name + " cannot be added twice")
     }
-    let arr = Array(this.numCols).fill(0).map(() => new Map())
+    let arr: Map<string, number>[] = Array(this.numCols).fill(0).map(() => new Map())
     this.gamestates.set(name, arr)    
   }
 
