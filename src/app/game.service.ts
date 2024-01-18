@@ -53,6 +53,13 @@ export class GameService {
     }
     return this.currGame.getPoints(name, col, rolltype)
   }
+
+  getPlayerTotal(playerName: string): number {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    return this.currGame.getPlayerTotal(playerName)
+  }
 }
 
 
@@ -96,4 +103,21 @@ class Game {
   getPlayers(): string[] {    
     return Array.from(this.gamestates.keys())
   }
+
+  getPlayerTotal(name: string): number {
+    let player = this.gamestates.get(name)
+    if(!player) {
+      throw Error("Player "+name+" is not registered!")
+    }
+    let total = 0
+    player.forEach(columnMap => {
+      columnMap.forEach((value, _) => {
+        if (value >= 0) {
+          total += value
+        }
+      })
+    })
+    return total
+  }
+
 }
