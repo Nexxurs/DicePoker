@@ -34,6 +34,10 @@ export class SetupComponent {
     this.playerinput.nativeElement.value = ""
   }
 
+  deletePlayer(name: String) {
+    this.players = this.players.filter((other) => other !== name)
+  }
+
   private createGameOptions(): GameOption {
     let columnMods: Map<number, ColumnModifier> = new Map()
     switch (this.gameType) {

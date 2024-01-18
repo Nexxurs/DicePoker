@@ -21,7 +21,10 @@
     <div>Players:</div>
     <div class="border min-h-40 rounded-md">
         @for (player of players; track $index) {
-        <div>{{player}}</div>
+        <div class="flex px-2">
+            <div class="flex-grow">{{player}}</div>
+            <button class="content-end text-red-600" (click)="deletePlayer(player)">X</button>
+        </div>
         }
     </div>
 
