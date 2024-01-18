@@ -1,11 +1,11 @@
-<div class="border rounded-md p-5">
+<div class="border rounded-md py-3 px-5">
     <div class="text-xl text-center pb-2">{{playerName}}</div>
 
     <table>
         <tbody>
             @for (rollType of rollTypes; track $index) {
             <tr>
-                <td>
+                <td class="w-5">
                     {{rollType.label}}
                 </td>
                 @for (col of rangeTo(numColumns); track $index) {
