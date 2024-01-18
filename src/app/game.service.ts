@@ -5,14 +5,22 @@ import { Injectable } from '@angular/core';
 })
 export class GameService {
   private currGame?: Game
-  constructor() { }
+  constructor() {
+    let savedGame = loadGameFromLocalStorage()
+    if (savedGame) {
+      this.currGame = savedGame
+    }
+  }
 
-  newGame(options: GameOption) {
+  newGame(options: GameOption, players: string[]) {
     this.currGame = new Game(options)
+    players.forEach(player => this.addPlayer(player))
+    saveGameToLocalStorage(this.currGame)
   }
 
   resetGame() {
     this.currGame = undefined
+    clearGameInLocalStorage()
   }
 
   gameStarted() {
@@ -33,7 +41,7 @@ export class GameService {
     return this.currGame.getPlayers()
   }
 
-  addPlayer(name: string) {
+  private addPlayer(name: string) {
     if (!this.currGame) {
       throw Error("Game not initialized")
     }
@@ -45,6 +53,7 @@ export class GameService {
       throw Error("Game not initialized")
     }
     this.currGame.setPoints(name, col, rolltype, value)
+    saveGameToLocalStorage(this.currGame)
   }
 
   getPoints(name: string, col: number, rolltype: string): number {
@@ -79,13 +88,20 @@ export interface GameOption {
   columnModifiers?: Map<number, ColumnModifier>
 }
 
+type GameStateMap = Map<string, Map<string, number>[]>
+
 
 class Game {
   options: GameOption
-  private gamestates: Map<string, Map<string, number>[]> = new Map()
+  private gamestates: GameStateMap
 
-  constructor(options: GameOption) {
+  constructor(options: GameOption, gamestates: GameStateMap | undefined = undefined) {
     this.options = options
+    if (gamestates) {
+      this.gamestates = gamestates
+    } else {
+      this.gamestates = new Map()
+    }
   }
 
   addPlayer(name: string) {
@@ -142,5 +158,49 @@ class Game {
     if (!colMods) return {}
     return colMods
   }
+}
 
+const LOCALSTORAGE_KEY_GAME = "CurrentGame"
+function loadGameFromLocalStorage(): Game | undefined {
+  let stored_string = localStorage.getItem(LOCALSTORAGE_KEY_GAME)
+  if (!stored_string) return undefined
+
+  console.log("Loading Game from LocalStorage");
+  let stored_value = JSON.parse(stored_string, jsonReviver)
+  // todo sanity checks
+
+  return new Game(stored_value.options, stored_value.gamestates)
+}
+
+function saveGameToLocalStorage(game: Game) {
+  console.log("Saving Game ino LocalStorage");
+
+  let game_string = JSON.stringify(game, jsonReplacer)
+  localStorage.setItem(LOCALSTORAGE_KEY_GAME, game_string)
+}
+
+function clearGameInLocalStorage() {
+  console.log("Clearing Game from LocalStorage");
+
+  localStorage.removeItem(LOCALSTORAGE_KEY_GAME)
+}
+
+function jsonReplacer(key: any, value: any) {
+  if (value instanceof Map) {
+    return {
+      dataType: 'Map',
+      value: Array.from(value.entries()),
+    };
+  } else {
+    return value;
+  }
+}
+
+function jsonReviver(key: any, value: any) {
+  if (typeof value === 'object' && value !== null) {
+    if (value.dataType === 'Map') {
+      return new Map(value.value);
+    }
+  }
+  return value;
 }
