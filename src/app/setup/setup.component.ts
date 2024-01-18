@@ -35,9 +35,9 @@ export class SetupComponent {
   }
 
   private createGameOptions(): GameOption {
+    let columnMods: Map<number, ColumnModifier> = new Map()
     switch (this.gameType) {
       case 'TWO':
-        let columnMods: Map<number, ColumnModifier> = new Map()
         columnMods.set(0, { label: "1x" })
         columnMods.set(1, { label: "2x", multiplier: 2 })
         return {
@@ -45,8 +45,12 @@ export class SetupComponent {
           columnModifiers: columnMods
         }
       case 'THREE':
+        columnMods.set(0, { label: "↓" })
+        columnMods.set(1, { label: "↑", multiplier: 2 })
+        columnMods.set(2, { label: "F", multiplier: 2 })
         return {
-          numberColumns: 3
+          numberColumns: 3,
+          columnModifiers: columnMods
         }
     }
   }
