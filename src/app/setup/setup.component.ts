@@ -62,7 +62,6 @@ export class SetupComponent {
     }
     let options = this.createGameOptions()
 
-    this.gameService.newGame(options)
-    this.players.forEach((player) => this.gameService.addPlayer(player))
+    this.gameService.newGame(options, this.players)
   }
 }
