@@ -3,6 +3,14 @@
 
     <table>
         <tbody>
+            <tr>
+                <td></td>
+                @for (col of rangeTo(numColumns); track $index) {
+                <td class="text-center">
+                    {{columnLabel(col)}}
+                </td>
+                }
+            </tr>
             @for (rollType of rollTypes; track $index) {
             <tr>
                 <td class="w-5">

@@ -22,4 +22,12 @@ export class PlayerCardComponent {
   totalPoints() {
     return this.gameService.getPlayerTotal(this.playerName)
   }
+
+  columnLabel(col: number) {
+    let modifiers = this.gameService.getColumnModifiers(col)
+    if (modifiers.label) {
+      return modifiers.label
+    }
+    return "" + (col + 1)
+  }
 }
