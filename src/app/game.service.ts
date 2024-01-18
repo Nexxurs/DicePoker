@@ -60,9 +60,16 @@ export class GameService {
     }
     return this.currGame.getPlayerTotal(playerName)
   }
+
+  getColumnModifiers(column: number): ColumnModifier {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    return this.currGame.getColumnModifiers(column)
+  }
 }
 
-interface ColumnModifier {
+export interface ColumnModifier {
   label?: string
   multiplier?: number
 }
@@ -128,6 +135,12 @@ class Game {
       })
     })
     return total
+  }
+
+  getColumnModifiers(column: number): ColumnModifier {
+    let colMods = this.options.columnModifiers?.get(column)
+    if (!colMods) return {}
+    return colMods
   }
 
 }

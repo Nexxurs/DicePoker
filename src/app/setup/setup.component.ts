@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { GameOption, GameService } from '../game.service';
+import { ColumnModifier, GameOption, GameService } from '../game.service';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
@@ -37,8 +37,12 @@ export class SetupComponent {
   private createGameOptions(): GameOption {
     switch (this.gameType) {
       case 'TWO':
+        let columnMods: Map<number, ColumnModifier> = new Map()
+        columnMods.set(0, { label: "1x" })
+        columnMods.set(1, { label: "2x", multiplier: 2 })
         return {
-          numberColumns: 2
+          numberColumns: 2,
+          columnModifiers: columnMods
         }
       case 'THREE':
         return {

@@ -30,10 +30,22 @@ export class PointFieldComponent {
     return points
   }
 
+  private applyGameModifiersToPoints(points: number): number {
+    let mods = this.gameService.getColumnModifiers(this.col)
+
+    if (mods.multiplier) {
+      return points * mods.multiplier
+    }
+    return points
+  }
+
   getPossiblePoints() {
     let result: { label: string, points: number }[] = []
     result.push({ label: "", points: 0 })
-    result = result.concat(this.rolltype.possibleValues.map(val => { return { label: val.toString(), points: val } }))
+    result = result.concat(this.rolltype.possibleValues.map(val => {
+      let pointsModified = this.applyGameModifiersToPoints(val)
+      return { label: pointsModified.toString(), points: pointsModified }
+    }))
     result.push({ label: "X", points: -1 })
     return result
   }
