@@ -7,8 +7,8 @@ export class GameService {
   private currGame?: Game
   constructor() { }
 
-  newGame(numCols: number) {    
-    this.currGame = new Game(numCols)
+  newGame(options: GameOption) {
+    this.currGame = new Game(options)
   }
 
   resetGame() {
@@ -23,13 +23,13 @@ export class GameService {
     if (!this.currGame) {
       throw Error("Game not initialized")
     }
-    return this.currGame.numCols
+    return this.currGame.options.numberColumns
   }
 
   getPlayers() {
     if (!this.currGame) {
       throw Error("Game not initialized")
-    }    
+    }
     return this.currGame.getPlayers()
   }
 
@@ -62,21 +62,31 @@ export class GameService {
   }
 }
 
+interface ColumnModifier {
+  label?: string
+  multiplier?: number
+}
+
+export interface GameOption {
+  numberColumns: number,
+  columnModifiers?: Map<number, ColumnModifier>
+}
+
 
 class Game {
-  numCols: number
+  options: GameOption
   private gamestates: Map<string, Map<string, number>[]> = new Map()
 
-  constructor(numCols: number) {
-    this.numCols = numCols
+  constructor(options: GameOption) {
+    this.options = options
   }
 
-  addPlayer(name: string) {    
+  addPlayer(name: string) {
     if (this.gamestates.has(name)) {
       throw Error("User " + name + " cannot be added twice")
     }
-    let arr: Map<string, number>[] = Array(this.numCols).fill(0).map(() => new Map())
-    this.gamestates.set(name, arr)    
+    let arr: Map<string, number>[] = Array(this.options.numberColumns).fill(0).map(() => new Map())
+    this.gamestates.set(name, arr)
   }
 
   setPoints(name: string, col: number, rolltype: string, value: number) {
@@ -100,14 +110,14 @@ class Game {
     return columnMap.get(rolltype) as number
   }
 
-  getPlayers(): string[] {    
+  getPlayers(): string[] {
     return Array.from(this.gamestates.keys())
   }
 
   getPlayerTotal(name: string): number {
     let player = this.gamestates.get(name)
-    if(!player) {
-      throw Error("Player "+name+" is not registered!")
+    if (!player) {
+      throw Error("Player " + name + " is not registered!")
     }
     let total = 0
     player.forEach(columnMap => {

@@ -1,6 +1,22 @@
 <div class="border rounded-lg p-5">
-    <div>Number of Columns</div>
-    <input class="border rounded-md inline p-2" type="number" value="3" #numCols />
+    <div>
+        Game Type
+    </div>
+    <div>
+        <input type="radio" class="btn-check" name="game-type" value="TWO" id="TWO" autocomplete="off"
+            [(ngModel)]="gameType" checked>
+        <label class="btn btn-secondary" for="TWO"
+            ngbTooltip="2 Columns, the second is worth twice as much points as the first">
+            2 Columns
+        </label>
+
+        <input type="radio" class="btn-check" name="game-type" value="THREE" id="THREE" [(ngModel)]="gameType"
+            autocomplete="off">
+        <label class="btn btn-secondary" for="THREE"
+            ngbTooltip="3 Columns, each with the same value. Normally the first column is played from the top, the second from the bottom  and the third can be freely played">
+            3 Columns
+        </label>
+    </div>
 
     <div>Players:</div>
     <div class="border min-h-40 rounded-md">
@@ -15,5 +31,6 @@
         <button class="btn" (click)="addPlayer(playername.value)">+</button>
     </div>
 
-    <button class="btn btn-primary w-full border mt-2 rounded-md p-2" (click)="startGame()" [disabled]="players.length === 0">Start Game</button>
+    <button class="btn btn-primary w-full border mt-2 rounded-md p-2" (click)="startGame()"
+        [disabled]="players.length === 0">Start Game</button>
 </div>
