@@ -17,11 +17,26 @@ export class SetupComponent {
   private gameService = inject(GameService)
 
   addPlayer(name: string) {
+    if(name.length === 0) {
+      return
+    }
+
+    if (this.players.includes(name)) {
+      console.warn("Cannot add Player twice - ignoring event")
+      // todo show the user some warning
+      return
+    }
+
     this.players.push(name)
     this.playerinput.nativeElement.value = ""    
   }
 
   startGame() {
+    if(this.players.length === 0) {
+      console.warn("Cannot start game without players - ignoring event")
+      return
+    }
+
     let numCols = Number(this.numColsInput.nativeElement.value)
 
     this.gameService.newGame(numCols)
