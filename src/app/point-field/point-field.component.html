@@ -7,5 +7,5 @@
     </div>
 </ng-template>
 
-<button class="border h-10 w-10 rounded-md" [popover]="popoverTemplate" [outsideClick]="true" #popover="bs-popover"
+<button class="border h-10 w-10 rounded-md" [ngbPopover]="popoverTemplate" [autoClose]="'outside'" #popover="ngbPopover"
     placement="top">{{getPoints()}}</button>
