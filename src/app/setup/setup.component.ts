@@ -60,6 +60,10 @@ export class SetupComponent {
   }
 
   startGame() {
+    if (this.playerinput.nativeElement.value !== "") {
+      this.addPlayer(this.playerinput.nativeElement.value)
+    }
+
     if (this.players.length === 0) {
       console.warn("Cannot start game without players - ignoring event")
       return
