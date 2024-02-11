@@ -50,8 +50,8 @@ export class SetupComponent {
         }
       case 'THREE':
         columnMods.set(0, { label: "↓" })
-        columnMods.set(1, { label: "↑", multiplier: 2 })
-        columnMods.set(2, { label: "F", multiplier: 2 })
+        columnMods.set(1, { label: "↑"})
+        columnMods.set(2, { label: "F"})
         return {
           numberColumns: 3,
           columnModifiers: columnMods
