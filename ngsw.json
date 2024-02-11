@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1707677649540,
+  "timestamp": 1707678819998,
   "index": "/DicePoker/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/DicePoker/favicon.ico",
         "/DicePoker/index.html",
-        "/DicePoker/main-VA6SQIEP.js",
+        "/DicePoker/main-SRCL5Z3T.js",
         "/DicePoker/manifest.webmanifest",
         "/DicePoker/polyfills-3ITNT4UF.js",
         "/DicePoker/styles-4NFAKEYM.css"
@@ -39,8 +39,8 @@
     "/DicePoker/assets/icons/icon-192x192.png": "fe2a051f1039a9e81846e7c8ddd7b2c6e27a7d04",
     "/DicePoker/assets/icons/icon-512x512.png": "641d9dc9355b3ba36b79ca44293f16a7a21b2c34",
     "/DicePoker/favicon.ico": "235821a5819f98cb80203dcac964536a231c176c",
-    "/DicePoker/index.html": "c22f6ebd398152751aa600a82b25ffa0c906f219",
-    "/DicePoker/main-VA6SQIEP.js": "11506a581ea70ffedc5256ca105526e137a951a5",
+    "/DicePoker/index.html": "291169025daf8cb9951c4b0b2ead455e3385e6e5",
+    "/DicePoker/main-SRCL5Z3T.js": "b544f3280355bc4497d5ebae70fbd16dc84cc717",
     "/DicePoker/manifest.webmanifest": "8098eca5038b689c6226dfc3ec557844f30ac870",
     "/DicePoker/polyfills-3ITNT4UF.js": "baeb2917e86590952550f52b2608f652fc8767c9",
     "/DicePoker/styles-4NFAKEYM.css": "f2a4188e0847a99da86d61b80d37950e31df5676"
