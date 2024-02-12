@@ -20,9 +20,26 @@ export class GameService {
     saveGameToLocalStorage(this.currGame)
   }
 
+  /**
+   * Stop and remove the current game
+   */
   resetGame() {
     this.currGame = undefined
     clearGameInLocalStorage()
+  }
+
+  /**
+   * Stop the current game and start a new one with the same options
+   */
+  restartGame() {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    let options = this.currGame.options
+    let players = this.currGame.getPlayers()
+    this.resetGame()
+    this.newGame(options, players)
+
   }
 
   setPointsChangedListener(callback: () => void) {

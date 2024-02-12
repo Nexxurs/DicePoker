@@ -35,6 +35,7 @@ export class AppComponent {
 		</div>
 		<div class="modal-footer">
       <button type="button" class="btn" (click)="onNewGame()">New Game</button>
+      <button type="button" class="btn" (click)="onRematch()">Rematch</button>
 			<button type="button" class="btn" (click)="close()">Cancel</button>
 		</div>
 	`,
@@ -49,6 +50,11 @@ export class NewGameModal {
 
   onNewGame() {
     this.gameService.resetGame()
+    this.close()
+  }
+
+  onRematch() {
+    this.gameService.restartGame()
     this.close()
   }
 }
