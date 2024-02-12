@@ -3,3 +3,7 @@
 .carousel-indicators {
     filter: invert(1);
 }
+
+.carousel-inner {
+    overflow: visible;
+}
