@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GameService {
   private currGame?: Game
+  private pointsChangedCallback?: () => void
   constructor() {
     let savedGame = loadGameFromLocalStorage()
     if (savedGame) {
@@ -21,6 +22,10 @@ export class GameService {
   resetGame() {
     this.currGame = undefined
     clearGameInLocalStorage()
+  }
+
+  setPointsChangedListener(callback: () => void) {
+    this.pointsChangedCallback = callback
   }
 
   gameStarted() {
@@ -53,7 +58,10 @@ export class GameService {
       throw Error("Game not initialized")
     }
     this.currGame.setPoints(name, col, rolltype, value)
-    saveGameToLocalStorage(this.currGame)
+    saveGameToLocalStorage(this.currGame)    
+    if (this.pointsChangedCallback) {
+      this.pointsChangedCallback()
+    }
   }
 
   getPoints(name: string, col: number, rolltype: string): number {

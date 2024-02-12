@@ -1,0 +1,18 @@
+@if (isSmallScreen) {
+    <ngb-carousel #smallCarousel [interval]="-1">
+        @for (player of gameService.getPlayers(); track $index) {
+            <ng-template ngbSlide>
+                <div class="flex px-5 pb-5">
+                    <app-player-card [numColumns]="gameService.getNumberColumns()" [playerName]="player" />
+                </div>
+            </ng-template>
+            }
+    </ngb-carousel>
+
+} @else {
+<div class="flex flex-wrap gap-2">
+    @for (player of gameService.getPlayers(); track $index) {
+    <app-player-card [numColumns]="gameService.getNumberColumns()" [playerName]="player" />
+    }
+</div>
+}

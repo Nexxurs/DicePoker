@@ -1,13 +1,7 @@
 <main class="flex min-h-screen flex-col items-center justify-between p-24">
   @if (gameService.gameStarted()) {
-  <div class="flex flex-wrap gap-2">
-    @for (player of gameService.getPlayers(); track $index) {
-    <app-player-card [numColumns]="gameService.getNumberColumns()" [playerName]="player" />
-    }
-  </div>
-
-  <button class="absolute top-1 right-1 btn btn-danger" (click)="onNewGame()">New Game</button>
-
+    <app-game-field/>
+    <button class="absolute top-1 right-1 btn btn-danger" (click)="onNewGame()">New Game</button>
   } @else {
   <app-setup />
   }

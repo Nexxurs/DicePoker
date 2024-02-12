@@ -5,11 +5,12 @@ import { PlayerCardComponent } from './player-card/player-card.component';
 import { GameService } from './game.service';
 import { SetupComponent } from './setup/setup.component';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GameFieldComponent } from './game-field/game-field.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PlayerCardComponent, SetupComponent],
+  imports: [CommonModule, RouterOutlet, PlayerCardComponent, SetupComponent, GameFieldComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
