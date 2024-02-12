@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { ColumnModifier, GameOption, GameService } from '../game.service';
+import { ColumnModifier, GameOption, GameService, getGameTypeFromLocalStorage, saveGameTypeToLocalStorage } from '../game.service';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { GameType } from '../../types/types';
 
 @Component({
   selector: 'app-setup',
@@ -13,11 +14,18 @@ import { FormsModule } from '@angular/forms';
 export class SetupComponent {
   @ViewChild("playername", { static: true }) playerinput!: ElementRef
 
-  gameType: "TWO" | "THREE" = "TWO"
+  gameType: GameType = "TWO"
 
   players: string[] = []
 
   private gameService = inject(GameService)
+
+  constructor() {
+    let storedGameType = getGameTypeFromLocalStorage()
+    if (storedGameType) {
+      this.gameType = storedGameType
+    }
+  }
 
   addPlayer(name: string) {
     if (name.length === 0) {
@@ -71,5 +79,6 @@ export class SetupComponent {
     let options = this.createGameOptions()
 
     this.gameService.newGame(options, this.players)
+    saveGameTypeToLocalStorage(this.gameType)
   }
 }

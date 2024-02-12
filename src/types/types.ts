@@ -20,3 +20,8 @@ export const RollTypes: RollType[] = [
     { label: "P", possibleValues: [40, 45] },
     { label: "G", possibleValues: [50, 100] }
 ]
+
+export type GameType = "TWO" | "THREE"
+export function isGameType(test: string): test is GameType {
+    return ["TWO", "THREE"].includes(test)
+}

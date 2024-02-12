@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GameType, isGameType } from '../types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -169,6 +170,7 @@ class Game {
 }
 
 const LOCALSTORAGE_KEY_GAME = "CurrentGame"
+const LOCALSTORAGE_KEY_GAMETYPE = "GameType"
 function loadGameFromLocalStorage(): Game | undefined {
   let stored_string = localStorage.getItem(LOCALSTORAGE_KEY_GAME)
   if (!stored_string) return undefined
@@ -181,7 +183,7 @@ function loadGameFromLocalStorage(): Game | undefined {
 }
 
 function saveGameToLocalStorage(game: Game) {
-  console.log("Saving Game ino LocalStorage");
+  console.log("Saving Game into LocalStorage");
 
   let game_string = JSON.stringify(game, jsonReplacer)
   localStorage.setItem(LOCALSTORAGE_KEY_GAME, game_string)
@@ -191,6 +193,23 @@ function clearGameInLocalStorage() {
   console.log("Clearing Game from LocalStorage");
 
   localStorage.removeItem(LOCALSTORAGE_KEY_GAME)
+}
+
+export function getGameTypeFromLocalStorage(): GameType | undefined {
+  console.log("Loading GameType from LocalStorage")
+  let stored_string = localStorage.getItem(LOCALSTORAGE_KEY_GAMETYPE)
+  if (!stored_string) {
+    return undefined
+  }
+  if (isGameType(stored_string)) {
+    return stored_string
+  }
+  return undefined
+}
+
+export function saveGameTypeToLocalStorage(gametype: GameType) {
+  console.log("Saving GameType ito LocalStorage", gametype)
+  localStorage.setItem(LOCALSTORAGE_KEY_GAMETYPE, gametype)
 }
 
 function jsonReplacer(key: any, value: any) {
