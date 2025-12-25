@@ -1,7 +1,13 @@
 <main class="flex min-h-screen flex-col items-center justify-between p-24">
   @if (gameService.gameStarted()) {
     <app-game-field/>
-    <button class="absolute top-1 right-1 btn btn-danger" (click)="onNewGame()">New Game</button>
+    <div class="absolute top-1 right-1 left-1">
+      <div class="flex place-content-between">
+        <button class="btn" (click)="onShowScore()">Score</button>
+        <button class="btn btn-danger" (click)="onNewGame()">New Game</button>
+      </div>
+    </div>
+
   } @else {
   <app-setup />
   }

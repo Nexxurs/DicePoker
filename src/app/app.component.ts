@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { PlayerCardComponent } from './player-card/player-card.component';
 import { GameService } from './game.service';
 import { SetupComponent } from './setup/setup.component';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GameFieldComponent } from './game-field/game-field.component';
+import {ScoreModalComponent} from "./score-modal/score-modal.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, PlayerCardComponent, SetupComponent, GameFieldComponent],
+  imports: [CommonModule, RouterOutlet, SetupComponent, GameFieldComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -22,6 +22,10 @@ export class AppComponent {
 
   onNewGame() {
     this.modalService.open(NewGameModal);
+  }
+
+  onShowScore() {
+    this.modalService.open(ScoreModalComponent)
   }
 }
 
