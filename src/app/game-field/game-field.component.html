@@ -1,4 +1,4 @@
-@if (isSmallScreen) {
+@if (screenUtils.isSmallScreen) {
     <ngb-carousel #smallCarousel [interval]="-1">
         @for (player of gameService.getPlayers(); track $index) {
             <ng-template ngbSlide>

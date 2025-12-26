@@ -1,8 +1,8 @@
-import { Component, inject, HostListener, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, inject, ViewChild, ViewEncapsulation} from '@angular/core';
 import { PlayerCardComponent } from '../player-card/player-card.component';
 import { GameService } from '../game.service';
 import { NgbCarousel, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgIf } from '@angular/common';
+import {ScreenUtilsService} from "../screen-utils.service";
 
 @Component({
   selector: 'app-game-field',
@@ -14,23 +14,12 @@ import { NgIf } from '@angular/common';
 })
 export class GameFieldComponent {
   gameService = inject(GameService)
-
-  isSmallScreen: boolean = false
+  screenUtils = inject(ScreenUtilsService)
 
   @ViewChild('smallCarousel', { static: false }) smallCarousel!: NgbCarousel;
 
   ngOnInit() {
-    this.calculateSmallScreen()
     this.gameService.setPointsChangedListener(this.onPointsChanged.bind(this))
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.calculateSmallScreen()
-  }
-
-  private calculateSmallScreen() {
-    this.isSmallScreen = window.innerWidth < 600    
   }
 
   private onPointsChanged() {

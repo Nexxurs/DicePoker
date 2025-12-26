@@ -1,16 +1,17 @@
-import { Component, inject } from '@angular/core';
+import {Component, HostListener, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { GameService } from './game.service';
 import { SetupComponent } from './setup/setup.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GameFieldComponent } from './game-field/game-field.component';
-import {ScoreModalComponent} from "./score-modal/score-modal.component";
+import {ScreenUtilsService} from "./screen-utils.service";
+import {NavbarComponent} from "./navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, SetupComponent, GameFieldComponent],
+  imports: [CommonModule, RouterOutlet, SetupComponent, GameFieldComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,14 +19,11 @@ export class AppComponent {
   title = 'dice-poker-angular';
 
   gameService = inject(GameService)
-  private modalService = inject(NgbModal)
+  private screenUtils = inject(ScreenUtilsService)
 
-  onNewGame() {
-    this.modalService.open(NewGameModal);
-  }
-
-  onShowScore() {
-    this.modalService.open(ScoreModalComponent)
+  @HostListener('window:resize')
+  onResize() {
+    this.screenUtils.onResize()
   }
 }
 
