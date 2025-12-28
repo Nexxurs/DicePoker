@@ -4,11 +4,14 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ScoreModalComponent} from "../score-modal/score-modal.component";
 import {NewGameModal} from "../app.component";
 import {GameConfigModalComponent} from "../game-config-modal/game-config-modal.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
