@@ -44,15 +44,25 @@
       }
     </div>
   </div>
-  @if (screenUtils.isSmallScreen) {
-    <!-- Expanded Burger Menu -->
-  <el-disclosure id="mobile-menu" [class]="{'hidden': isCollapsed}" class="block">
-    <div class="space-y-1 px-2 pt-2 pb-3">
+</nav>
+
+@if (screenUtils.isSmallScreen) {
+  <!-- Sidebar -->
+    <!-- Overlay -->
+  <div id="overlay" (click)="toggleCollapse()"
+       class="fixed inset-0 bg-black/50 transition-opacity duration-300 z-40"
+       [class]="{'opacity-0': isCollapsed, 'pointer-events-none': isCollapsed}"></div>
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg
+                transform transition-transform duration-300 z-50"
+         [class]="{'-translate-x-full': isCollapsed}">
+    <div class="p-4 font-semibold border-b">Dice-Poker</div>
+    <nav class="p-4 space-y-3">
       <button (click)="openScoreModal()"
-              class="w-full block text-start rounded-md bg-gray-500 px-3 py-2 text-base font-medium text-white">
+              class="w-full block text-start rounded-md py-2 text-base font-medium text-gray-700 hover:text-black">
         Score
       </button>
-    </div>
-  </el-disclosure>
-  }
-</nav>
+    </nav>
+  </aside>
+}
