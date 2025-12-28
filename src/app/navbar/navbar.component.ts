@@ -3,6 +3,7 @@ import {ScreenUtilsService} from "../screen-utils.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ScoreModalComponent} from "../score-modal/score-modal.component";
 import {NewGameModal} from "../app.component";
+import {GameConfigModalComponent} from "../game-config-modal/game-config-modal.component";
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,10 @@ export class NavbarComponent {
 
   openScoreModal() {
     this.modalService.open(ScoreModalComponent)
+  }
+
+  openPlayerModal() {
+    this.modalService.open(GameConfigModalComponent)
   }
 
   onNewGame() {

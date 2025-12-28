@@ -1,0 +1,13 @@
+<div class="modal-body">
+  <div class="font-bold text-xl pb-2">Players</div>
+  <ul class="overflow-hidden" cdkDropList (cdkDropListDropped)="playerDrop($event)">
+    @for (player of players; track $index) {
+      <li cdkDrag class="select-none rounded border px-4 py-2 bg-gray-50">{{player}}</li>
+    }
+  </ul>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn" (click)="saveAndClose()">Save</button>
+  <button type="button" class="btn" (click)="cancel()">Cancel</button>
+</div>
