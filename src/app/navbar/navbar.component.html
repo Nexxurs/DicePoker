@@ -1,0 +1,66 @@
+<nav
+  class="relative  after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      @if (screenUtils.isSmallScreen) {
+        <div class="absolute inset-y-0 left-0 w-full flex items-center place-content-between">
+          <!-- Mobile menu button-->
+          <button (click)="toggleCollapse()"
+                  class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <img ngSrc="assets/icons/burger-menu.svg" height="24" width="24" alt="burger-menu"/>
+          </button>
+          <button (click)="onNewGame()" class="bg-danger text-white rounded-md px-3 py-2 text-sm font-medium">
+            New Game
+          </button>
+        </div>
+      } @else {
+        <div class="flex flex-1 items-stretch place-content-between">
+          <!-- Left side-->
+          <div class="flex space-x-4">
+            <button (click)="openScoreModal()"
+                    class="rounded-md bg-gray-500 px-3 py-2 text-sm font-medium text-white">
+              Score
+            </button>
+            <button (click)="openPlayerModal()"
+                    class="rounded-md bg-gray-500 px-3 py-2 text-sm font-medium text-white">
+              Players
+            </button>
+          </div>
+          <!-- Right side-->
+          <div class="flex space-x-4">
+            <button (click)="onNewGame()" class="bg-danger text-white rounded-md px-3 py-2 text-sm font-medium">
+              New Game
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</nav>
+
+@if (screenUtils.isSmallScreen) {
+  <!-- Sidebar -->
+    <!-- Overlay -->
+  <div id="overlay" (click)="toggleCollapse()"
+       class="fixed inset-0 bg-black/50 transition-opacity duration-300 z-40"
+       [class]="{'opacity-0': isCollapsed, 'pointer-events-none': isCollapsed}"></div>
+  <!-- Sidebar -->
+  <aside id="sidebar"
+         class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg
+                transform transition-transform duration-300 z-50"
+         [class]="{'-translate-x-full': isCollapsed}">
+    <div class="p-4 font-semibold border-b">Dice-Poker</div>
+    <nav class="p-4 space-y-3">
+      <button (click)="openScoreModal()"
+              class="w-full block text-start rounded-md py-2 text-base font-medium text-gray-700 hover:text-black">
+        Score
+      </button>
+      <button (click)="openPlayerModal()"
+              class="w-full block text-start rounded-md py-2 text-base font-medium text-gray-700 hover:text-black">
+        Players
+      </button>
+    </nav>
+  </aside>
+}

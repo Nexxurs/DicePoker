@@ -64,7 +64,7 @@ export class GameService {
     return this.currGame.getPlayers()
   }
 
-  private addPlayer(name: string) {
+  addPlayer(name: string) {
     if (!this.currGame) {
       throw Error("Game not initialized")
     }
@@ -76,7 +76,7 @@ export class GameService {
       throw Error("Game not initialized")
     }
     this.currGame.setPoints(name, col, rolltype, value)
-    saveGameToLocalStorage(this.currGame)    
+    saveGameToLocalStorage(this.currGame)
     if (this.pointsChangedCallback) {
       this.pointsChangedCallback()
     }
@@ -101,6 +101,27 @@ export class GameService {
       throw Error("Game not initialized")
     }
     return this.currGame.getColumnModifiers(column)
+  }
+
+  reorderPlayers(names: string[]) {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    this.currGame.reorderPlayers(names)
+  }
+
+  deletePlayer(name: string) {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    this.currGame.deletePlayer(name)
+  }
+
+  saveGame() {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    saveGameToLocalStorage(this.currGame)
   }
 }
 
@@ -161,6 +182,18 @@ class Game {
 
   getPlayers(): string[] {
     return Array.from(this.gamestates.keys())
+  }
+
+  reorderPlayers(names: string[]) {
+    let newGameStates = new Map(names.map(n => [n, this.gamestates.get(n)]))
+    if (newGameStates === undefined) {
+      throw Error("Something went wrong")
+    }
+    this.gamestates = newGameStates as GameStateMap
+  }
+
+  deletePlayer(name: string) {
+    this.gamestates.delete(name);
   }
 
   getPlayerTotal(name: string): number {

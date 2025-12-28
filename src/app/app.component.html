@@ -1,17 +1,11 @@
-<main class="flex min-h-screen flex-col items-center justify-between p-24">
-  @if (gameService.gameStarted()) {
-    <app-game-field/>
-    <div class="absolute top-1 right-1 left-1">
-      <div class="flex place-content-between">
-        <button class="btn" (click)="onShowScore()">Score</button>
-        <button class="btn btn-danger" (click)="onNewGame()">New Game</button>
-      </div>
-    </div>
-
-  } @else {
-  <app-setup />
-  }
-
-</main>
-
+@if (gameService.gameStarted()) {
+  <app-navbar/>
+  <main class="flex min-h-screen flex-col items-center justify-between py-6 px-10">
+    <app-game-field class="w-full"/>
+  </main>
+} @else {
+  <main class="flex min-h-screen flex-col items-center justify-between p-24">
+    <app-setup/>
+  </main>
+}
 <router-outlet></router-outlet>
