@@ -64,7 +64,7 @@ export class GameService {
     return this.currGame.getPlayers()
   }
 
-  private addPlayer(name: string) {
+  addPlayer(name: string) {
     if (!this.currGame) {
       throw Error("Game not initialized")
     }
@@ -115,6 +115,13 @@ export class GameService {
       throw Error("Game not initialized")
     }
     this.currGame.deletePlayer(name)
+  }
+
+  saveGame() {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    saveGameToLocalStorage(this.currGame)
   }
 }
 

@@ -10,6 +10,12 @@
       </div>
     }
   </div>
+
+  <div class="border rounded-md text-center p-1 flex">
+    <input class="grow" type="text" #playername (keyup.enter)="playerAdd(playername.value)"
+           placeholder="Add new Player" />
+    <button class="btn" (click)="playerAdd(playername.value)">+</button>
+  </div>
 </div>
 
 <div class="modal-footer">
