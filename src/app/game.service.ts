@@ -109,6 +109,13 @@ export class GameService {
     }
     this.currGame.reorderPlayers(names)
   }
+
+  deletePlayer(name: string) {
+    if (!this.currGame) {
+      throw Error("Game not initialized")
+    }
+    this.currGame.deletePlayer(name)
+  }
 }
 
 export interface ColumnModifier {

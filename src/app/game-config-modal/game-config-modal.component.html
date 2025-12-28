@@ -1,10 +1,15 @@
 <div class="modal-body">
   <div class="font-bold text-xl pb-2">Players</div>
-  <ul class="overflow-hidden" cdkDropList (cdkDropListDropped)="playerDrop($event)">
+  <div class="overflow-hidden" cdkDropList (cdkDropListDropped)="playerDrop($event)">
     @for (player of players; track $index) {
-      <li cdkDrag class="select-none rounded border px-4 py-2 bg-gray-50">{{player}}</li>
+      <div cdkDrag class="select-none rounded border px-2 py-2 mb-2 bg-gray-50 flex gap-3 items-center">
+        <img ngSrc="assets/icons/burger-menu.svg" height="24" width="24" alt="burger-menu"/>
+        {{player}}
+        <div class="grow"></div>
+        <button class="btn btn-danger" (click)="playerDelete(player)">X</button>
+      </div>
     }
-  </ul>
+  </div>
 </div>
 
 <div class="modal-footer">
