@@ -30,6 +30,11 @@
           </div>
           <!-- Right side-->
           <div class="flex space-x-4">
+            <button (click)="requestWakeLock()" [disabled]="isWakeLockActive()"
+                    title="Keep screen on"
+                    class="rounded-md enabled:border-gray-700 disabled:border-gray-200 border-1 px-3 py-2 disabled:text-gray-500">
+              <app-wakelock/>
+            </button>
             <button (click)="onNewGame()" class="bg-danger text-white rounded-md px-3 py-2 text-sm font-medium">
               New Game
             </button>
@@ -60,6 +65,12 @@
       <button (click)="openPlayerModal()"
               class="w-full block text-start rounded-md py-2 text-base font-medium text-gray-700 hover:text-black">
         Players
+      </button>
+
+      <button (click)="requestWakeLock()"
+              [disabled]="isWakeLockActive()"
+              class="w-full block text-start rounded-md py-2 text-base font-medium enabled:text-gray-700 hover:enabled:text-black disabled:text-gray-400">
+        Keep screen on
       </button>
     </nav>
   </aside>
