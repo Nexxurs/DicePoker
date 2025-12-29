@@ -3,11 +3,12 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {GameService} from "../game.service";
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from "@angular/cdk/drag-drop";
 import {NgOptimizedImage} from "@angular/common";
+import {BurgermenuComponent} from "../icons/burgermenu/burgermenu.component";
 
 @Component({
   selector: 'app-game-config-modal',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, NgOptimizedImage],
+  imports: [CdkDropList, CdkDrag, NgOptimizedImage, BurgermenuComponent],
   templateUrl: './game-config-modal.component.html',
   styleUrl: './game-config-modal.component.css'
 })

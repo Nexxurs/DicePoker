@@ -6,13 +6,15 @@ import {NewGameModal} from "../app.component";
 import {GameConfigModalComponent} from "../game-config-modal/game-config-modal.component";
 import {NgOptimizedImage} from "@angular/common";
 import {WakelockComponent} from "../icons/wakelock/wakelock.component";
+import {BurgermenuComponent} from "../icons/burgermenu/burgermenu.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     NgOptimizedImage,
-    WakelockComponent
+    WakelockComponent,
+    BurgermenuComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
