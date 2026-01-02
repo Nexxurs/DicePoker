@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GameType, isGameType } from '../types/types';
+import {vemetric} from "@vemetric/web";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class GameService {
     this.currGame = new Game(options)
     players.forEach(player => this.addPlayer(player))
     saveGameToLocalStorage(this.currGame)
+    vemetric.trackEvent("game-started", {
+      eventData: {
+        "player-count": players.length
+      }
+    })
   }
 
   /**
@@ -157,6 +163,20 @@ class Game {
     }
     let arr: Map<string, number>[] = Array(this.options.numberColumns).fill(0).map(() => new Map())
     this.gamestates.set(name, arr)
+  }
+
+  isGameDone(): boolean {
+    // this strategy does not work - if no values are given yet, there is no entry in the columnmap!!
+    for (const [_, pointMap] of this.gamestates) {
+      for (const columnMap of pointMap) {
+        for (const [_, value] of columnMap) {
+          if (value === 0) {
+            return false
+          }
+        }
+      }
+    }
+    return true
   }
 
   setPoints(name: string, col: number, rolltype: string, value: number) {

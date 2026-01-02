@@ -4,7 +4,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ScoreModalComponent} from "../score-modal/score-modal.component";
 import {NewGameModal} from "../app.component";
 import {GameConfigModalComponent} from "../game-config-modal/game-config-modal.component";
-import {NgOptimizedImage} from "@angular/common";
 import {WakelockComponent} from "../icons/wakelock/wakelock.component";
 import {BurgermenuComponent} from "../icons/burgermenu/burgermenu.component";
 
@@ -12,7 +11,6 @@ import {BurgermenuComponent} from "../icons/burgermenu/burgermenu.component";
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    NgOptimizedImage,
     WakelockComponent,
     BurgermenuComponent
   ],
